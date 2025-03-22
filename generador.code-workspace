@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../terraform"
+		},
+		{
+			"path": "../multi-service-app-kubernetes-eks"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,37 @@
+# 1. Crear la estructura del proyecto.
+
+    mkdir -p mi_app_web
+
+# Navegar al directorio principal
+    cd mi_app_web
+
+# Crear el entorno virtual (venv)
+    python -m venv venv
+
+# Crear el archivo app.py
+    touch app.py
+
+# Crear la carpeta templates y el archivo index.html
+    mkdir -p templates
+    touch templates/index.html
+
+#####Sera esta donde la carpeta venv sera el entorno virtual de trabajo
+
+├── venv/
+├── app.py
+└── templates/
+    └── index.html
+
+# 2. Activar el entorno de trabajo primero ubicarse en la carpeta del proyecto que se creo arriba
+
+    source venv/Scripts/activate
+
+# 3. Instalar Flask
+
+    #Actualiza PIP
+    python -m pip install --upgrade pip
+    
+    #Instala Flask
+    pip install Flask
+
+

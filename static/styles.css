@@ -1,0 +1,89 @@
+/* static/styles.css */
+
+/* Estilos para el cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    /* Tamaño de la letra reducido a 11 */
+    margin: 0;
+    /* Eliminar márgenes predeterminados */
+    padding: 0;
+    /* Eliminar rellenos predeterminados */
+}
+
+/* Contenedor principal */
+.container-fluid {
+    padding: 20px;
+    /* Espaciado interno */
+}
+
+/* Estilos para los botones personalizados */
+.btn-custom {
+    background-color: #4CAF50;
+    /* Color de fondo */
+    color: white;
+    /* Color del texto */
+    padding: 8px 16px;
+    /* Espaciado interno */
+    border: none;
+    /* Sin borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    font-size: 11px;
+    /* Tamaño de la fuente */
+    cursor: pointer;
+    /* Cambia el cursor al pasar el mouse */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Transiciones */
+    margin: 5px;
+    /* Espaciado entre botones */
+}
+
+.btn-custom:hover {
+    background-color: #45a049;
+    /* Cambia el color al pasar el mouse */
+    transform: scale(1.05);
+    /* Efecto de escala */
+}
+
+.btn-custom:active {
+    background-color: #3d8b40;
+    /* Cambia el color al hacer clic */
+    transform: scale(0.95);
+    /* Efecto de escala */
+}
+
+/* Estilos para las tablas */
+.small-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    /* Tamaño de la letra reducido a 11 */
+}
+
+.small-table th,
+.small-table td {
+    padding: 8px;
+    text-align: center;
+}
+
+.small-table thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.small-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo para resaltar la celda de la ficha actual */
+.current-ficha {
+    background-color: #4CAF50;
+    /* Fondo verde */
+    color: white;
+    /* Texto blanco */
+    font-size: medium;
+    border-color: #3d8b40;
+    font-weight: bold;
+    /* Texto en negrita */
+}
