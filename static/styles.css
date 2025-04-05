@@ -87,3 +87,18 @@ body {
     font-weight: bold;
     /* Texto en negrita */
 }
+
+.navigation-info {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.lead {
+    background-color: #eaf2ea;
+    padding: 5px;
+    margin: 20px;
+    font-size: medium;
+    font-weight: bold;
+}
