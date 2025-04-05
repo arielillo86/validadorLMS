@@ -1,64 +1,64 @@
-/* static/styles.css */
-
-/* Estilos para el cuerpo */
+/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     font-size: 11px;
-    /* Tamaño de la letra reducido a 11 */
     margin: 0;
-    /* Eliminar márgenes predeterminados */
     padding: 0;
-    /* Eliminar rellenos predeterminados */
+    background-color: #f8f9fa;
 }
 
-/* Contenedor principal */
 .container-fluid {
     padding: 20px;
-    /* Espaciado interno */
 }
 
-/* Estilos para los botones personalizados */
+/* Botones personalizados */
 .btn-custom {
     background-color: #4CAF50;
-    /* Color de fondo */
     color: white;
-    /* Color del texto */
     padding: 8px 16px;
-    /* Espaciado interno */
     border: none;
-    /* Sin borde */
     border-radius: 5px;
-    /* Bordes redondeados */
     font-size: 11px;
-    /* Tamaño de la fuente */
     cursor: pointer;
-    /* Cambia el cursor al pasar el mouse */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* Transiciones */
     margin: 5px;
-    /* Espaciado entre botones */
+    min-width: 100px;
 }
 
 .btn-custom:hover {
     background-color: #45a049;
-    /* Cambia el color al pasar el mouse */
     transform: scale(1.05);
-    /* Efecto de escala */
 }
 
 .btn-custom:active {
     background-color: #3d8b40;
-    /* Cambia el color al hacer clic */
     transform: scale(0.95);
-    /* Efecto de escala */
 }
 
-/* Estilos para las tablas */
+.btn-custom.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Tarjetas */
+.card {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-weight: bold;
+    padding: 12px 15px;
+    font-size: 12px;
+}
+
+/* Tablas */
 .small-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 11px;
-    /* Tamaño de la letra reducido a 11 */
 }
 
 .small-table th,
@@ -76,29 +76,114 @@ body {
     background-color: #f1f1f1;
 }
 
-/* Estilo para resaltar la celda de la ficha actual */
-.current-ficha {
-    background-color: #4CAF50;
-    /* Fondo verde */
-    color: white;
-    /* Texto blanco */
-    font-size: medium;
-    border-color: #3d8b40;
-    font-weight: bold;
-    /* Texto en negrita */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-active {
+    background-color: rgba(76, 175, 80, 0.15) !important;
+    font-weight: bold;
+}
+
+/* Elementos de navegación */
 .navigation-info {
     background-color: #f8f9fa;
     padding: 10px;
     margin: 10px 0;
     font-weight: bold;
+    font-size: 12px;
+    border-left: 4px solid #4CAF50;
 }
 
 .lead {
     background-color: #eaf2ea;
-    padding: 5px;
-    margin: 20px;
-    font-size: medium;
+    padding: 5px 10px;
+    margin: 10px 0;
+    font-size: 11px;
     font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Badges */
+.badge {
+    font-size: 10px;
+    font-weight: normal;
+    padding: 4px 6px;
+}
+
+.bg-success {
+    background-color: #4CAF50 !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+/* Alertas */
+.alert {
+    padding: 8px 12px;
+    font-size: 11px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .btn-custom {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .preview-section .col-md-4 {
+        margin-bottom: 15px;
+    }
+}
+
+/* Estilos para el textarea de fichas */
+#fichas-input {
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+/* Estilos para los botones */
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+    transition: all 0.3s;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    transform: translateY(-1px);
+}
+
+/* Estilos para el contador */
+.fichas-contador {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-align: right;
+    margin-top: 0.5rem;
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Ficha {{ numero }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Detalle de Ficha</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <h6>Número de Ficha:</h6>
+                    <p class="lead">{{ numero }}</p>
+                </div>
+                <div class="mb-3">
+                    <h6>Código Asociado:</h6>
+                    <p class="lead">{{ codigo if codigo else "No asignado" }}</p>
+                </div>
+                <a href="{{ url_for('home') }}" class="btn btn-primary">Volver al Inicio</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
