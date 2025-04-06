@@ -1,33 +1,100 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle de Ficha {{ numero }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
+{% block title %}Ficha {{ numero }} - ZAJUNA Validator{% endblock %}
 
-<body class="bg-light">
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Detalle de Ficha</h5>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <h6>Número de Ficha:</h6>
-                    <p class="lead">{{ numero }}</p>
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="bi bi-file-earmark-text"></i> Detalle de Ficha
+                        </h5>
+                        <span class="badge bg-light text-dark fs-6">
+                            {% if codigo %}
+                            <i class="bi bi-check-circle-fill text-success"></i> Con código
+                            {% else %}
+                            <i class="bi bi-exclamation-triangle-fill text-warning"></i> Sin código
+                            {% endif %}
+                        </span>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <h6>Código Asociado:</h6>
-                    <p class="lead">{{ codigo if codigo else "No asignado" }}</p>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="text-muted mb-3">
+                                    <i class="bi bi-123"></i> Número de Ficha
+                                </h6>
+                                <div class="display-4 fw-bold text-primary">
+                                    {{ numero }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="text-muted mb-3">
+                                    <i class="bi bi-key"></i> Código Asociado
+                                </h6>
+                                <div
+                                    class="display-4 fw-bold {% if codigo %}text-success{% else %}text-secondary{% endif %}">
+                                    {{ codigo if codigo else "N/A" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ url_for('home') }}" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-left"></i> Volver al listado
+                        </a>
+
+                        <div class="btn-group">
+                            {% if codigo %}
+                            <button class="btn btn-success" onclick="copiarCodigo()">
+                                <i class="bi bi-clipboard"></i> Copiar Código
+                            </button>
+                            {% endif %}
+                            <a href="https://zajuna.sena.edu.co/zajuna/course/management.php?search={{ numero }}{% if codigo %}&cod={{ codigo }}{% endif %}"
+                                target="_blank" class="btn btn-primary">
+                                <i class="bi bi-box-arrow-up-right"></i> Abrir en ZAJUNA
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <a href="{{ url_for('home') }}" class="btn btn-primary">Volver al Inicio</a>
             </div>
         </div>
     </div>
-</body>
+</div>
+{% endblock %}
 
-</html>
+{% block scripts %}
+<script>
+    function copiarCodigo() {
+        navigator.clipboard.writeText("{{ codigo }}")
+            .then(() => {
+                // Mostrar toast de confirmación
+                const toast = new bootstrap.Toast(document.getElementById('copyToast'));
+                toast.show();
+            });
+    }
+</script>
+
+<!-- Toast para confirmación de copiado -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="copyToast" class="toast align-items-center text-white bg-success" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="bi bi-check-circle me-2"></i> Código copiado al portapapeles
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{% endblock %}

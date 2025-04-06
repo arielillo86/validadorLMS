@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Administración - ZAJUNA Validator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Cargar Fichas a BD</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('admin_upload_fichas') }}" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="fichas-file" class="form-label">Archivo TXT con fichas (una por línea)</label>
+                        <input type="file" class="form-control" id="fichas-file" name="file" accept=".txt" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-upload"></i> Cargar Fichas
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Cargar LMS_ID a BD</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('admin_upload_codigos') }}" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="codigos-file" class="form-label">Archivo TXT con LMS_ID (uno por línea)</label>
+                        <input type="file" class="form-control" id="codigos-file" name="file" accept=".txt" required>
+                    </div>
+                    <button type="submit" class="btn btn-info w-100 text-white">
+                        <i class="bi bi-upload"></i> Cargar LMD_ID
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-dark text-white">
+        <h5 class="mb-0">Estado Actual de Fichas y LMS_ID</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ficha</th>
+                        <th>Código</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ficha, codigo in parejas %}
+                    <tr class="{% if not codigo %}table-warning{% endif %}">
+                        <td>{{ ficha }}</td>
+                        <td>{{ codigo if codigo else "---" }}</td>
+                        <td>
+                            {% if codigo %}
+                            <span class="badge bg-success">Completo</span>
+                            {% else %}
+                            <span class="badge bg-warning text-dark">Falta código</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
