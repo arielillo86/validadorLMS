@@ -14,8 +14,9 @@
                     Ingrese fichas a validar (una por línea):
                 </label>
                 <textarea class="form-control" id="fichas-input" name="fichas" rows="10"
-                    placeholder="Ejemplo:&#10;12345&#10;67890&#10;54321">{% if numbers %}{{ '\n'.join(numbers|map('string')) }}{% endif %}</textarea>
-                <small class="text-muted">Escriba un número de ficha por cada línea</small>
+                    placeholder="Ejemplo:&#10;0&#10;12345&#10;67890&#10;54321">{% if numbers %}{{ '\n'.join(numbers|map('string')) }}{% endif %}</textarea>
+                <small class="text-muted">Escriba un número de ficha por cada línea recuerde colocar un 0 en la primera
+                    posición</small>
             </div>
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary bg-success">
@@ -78,7 +79,7 @@
         <div class="fichas-lista mb-3">
             {% for num in numbers %}
             <span
-                class="badge {% if num == current_number %}bg-primary bg-success{% else %}bg-secondary{% endif %} me-1 mb-1">
+                class="badge {% if num == current_ficha %}bg-primary bg-success{% else %}bg-secondary{% endif %} me-1 mb-1">
                 {{ num }}
             </span>
             {% endfor %}
