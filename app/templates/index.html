@@ -8,7 +8,7 @@
         <h5 class="mb-0">Validar Fichas</h5>
     </div>
     <div class="card-body">
-        <form action="/procesar-fichas" method="POST">
+        <form action="{{ url_for('main.procesar_fichas') }}" method="POST">
             <div class="mb-3">
                 <label for="fichas-input" class="form-label">
                     Ingrese fichas a validar (una por línea):
@@ -60,11 +60,12 @@
         </div>
 
         <div class="text-center">
-            <a href="{{ url_for('previous') }}"
+            <a href="{{ url_for('main.previous') }}"
                 class="btn btn-lg btn-custom {% if not prev_number %}disabled{% endif %}">
                 <i class="bi bi-arrow-left-circle"></i> Anterior
             </a>
-            <a href="{{ url_for('next') }}" class="btn btn-lg btn-custom {% if not next_number %}disabled{% endif %}">
+            <a href="{{ url_for('main.next') }}"
+                class="btn btn-lg btn-custom {% if not next_number %}disabled{% endif %}">
                 <i class="bi bi-arrow-right-circle"></i> Siguiente
             </a>
         </div>

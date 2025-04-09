@@ -1,0 +1,34 @@
+Generador/
+├── app/
+│   ├── __init__.py
+│   ├── controllers/          # Controladores (lógica de negocio)
+│   │   ├── admin_controller.py
+│   │   ├── ficha_controller.py
+│   │   └── main_controller.py
+│   ├── models/               # Modelos (acceso a datos)
+│   │   ├── database.py
+│   │   ├── ficha_model.py
+│   │   └── codigo_model.py
+│   ├── static/
+│   │   └── css/
+│   │       └── styles.css
+│   ├── templates/            # Vistas
+│   │   ├── admin.html
+│   │   ├── base.html
+│   │   ├── ficha.html
+│   │   └── index.html
+│   ├── utils/                # Utilidades
+│   │   ├── file_handlers.py
+│   │   └── url_generator.py
+│   └── views/                # Vistas lógicas (blueprints)
+│       ├── admin_views.py
+│       └── main_views.py
+├── config.py                 # Configuración
+├── requirements.txt          # Dependencias
+├── uploads/                  # Archivos subidos
+├── venv/                     # Entorno virtual
+├── database.db               # Base de datos
+├── run.py                    # Punto de entrada
+└── tests/                    # Pruebas
+    ├── test_controllers/
+    └── test_models/

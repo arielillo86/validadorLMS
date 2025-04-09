@@ -1,0 +1,17 @@
+# Cache de Python
+__pycache__/
+*.py[cod]
+
+# Archivos de desarrollo
+*.log
+*.sqlite
+*.db
+
+# Configuraciones locales
+instance/
+.dockerignore
+Dockerfile.dev
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

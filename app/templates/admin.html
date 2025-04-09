@@ -10,7 +10,7 @@
                 <h5 class="mb-0">Cargar Fichas a BD</h5>
             </div>
             <div class="card-body">
-                <form action="{{ url_for('admin_upload_fichas') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url_for('admin.admin_upload_fichas') }}" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="fichas-file" class="form-label">Archivo TXT con fichas (una por línea)</label>
                         <input type="file" class="form-control" id="fichas-file" name="file" accept=".txt" required>
@@ -29,7 +29,7 @@
                 <h5 class="mb-0">Cargar LMS_ID a BD</h5>
             </div>
             <div class="card-body">
-                <form action="{{ url_for('admin_upload_codigos') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url_for('admin.admin_upload_codigos') }}" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="codigos-file" class="form-label">Archivo TXT con LMS_ID (uno por línea)</label>
                         <input type="file" class="form-control" id="codigos-file" name="file" accept=".txt" required>
