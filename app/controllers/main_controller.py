@@ -16,23 +16,36 @@ class MainController:
     
     @staticmethod
     def generar_y_abrir_url(numero_ficha):
-        """Versión simplificada con validación estricta"""
+        """Versión mejorada que:
+        - Siempre abre el navegador
+        - Maneja el caso cuando no existe la ficha
+        - Evita errores de NoneType
+        """
         try:
-            # Obtener el código de la base de datos
+            # 1. Construye URL base (siempre se genera)
+            url = f"https://zajuna.sena.edu.co/zajuna/course/management.php?categoryid=1&view=courses&search={numero_ficha}"
+            mensaje = None
+            
+            # 2. Intenta enriquecer la URL si existe la ficha
             ficha = Ficha.obtener_por_numero(numero_ficha)
             if not ficha:
-                return False, f'Ficha {numero_ficha} no encontrada'
+                mensaje = f"Ficha {numero_ficha} no encontrada en BD local"
+            else:
+                try:
+                    codigo = Codigo.obtener_por_ficha(ficha[0])
+                    if codigo and codigo[0]:
+                        url += f"&courseid={codigo[0]}"
+                except Exception as db_error:
+                    print(f"Error al obtener código: {db_error}")
             
-            codigo = Codigo.obtener_por_ficha(ficha[0])
+            # 3. Abre el navegador SIEMPRE
+            print(f"URL generada: {url}")
+            webbrowser.open(url, new=2)
             
-            # Construcción exacta requerida
-            url = f"https://zajuna.sena.edu.co/zajuna/course/management.php?categoryid=1&view=courses&search={numero_ficha}"
-            
-            if codigo and codigo[0]:  # Validación estricta
-                url += f"&courseid={codigo[0]}"
-            
-            webbrowser.open(url)
-            return True, None
+            # 4. Retorna resultado (éxito + URL) o (fallo + mensaje)
+            return (True, url) if mensaje is None else (False, mensaje)
             
         except Exception as e:
-            return False, f'Error: {str(e)}'
+            error_msg = f"Error inesperado: {str(e)}"
+            print(error_msg)
+            return False, error_msg
