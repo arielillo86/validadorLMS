@@ -1,7 +1,7 @@
 # app/controllers/admin_controller.py
 import os
-from ..models.ficha_model import Ficha
-from ..models.codigo_model import Codigo
+from app.models.ficha_model import Ficha
+from app.models.codigo_model import Codigo
 from flask import current_app
 
 class AdminController:

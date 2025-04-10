@@ -4,8 +4,8 @@ __pycache__/
 
 # Archivos de desarrollo
 *.log
-*.sqlite
-*.db
+#*.sqlite
+#*.db
 
 # Configuraciones locales
 instance/

@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  portainer:
+    image: rodriguezfariel/personal:latest
+    container_name: validadorez
+    restart: always
+    # Activar solo si de desea exponer el puerto directamente recordar que se debe abri en las reglas
+    # de seguridad del firewall el puerto en AWS en el grupod e seguridad
+    ports:
+      - 5000:5000
+    volumes:
+      - ./uploads:/app/uploads # Directorio para archivos subidos
+      - ./instance:/app/instance # Para SQLite en desarrollo
+    environment:
+      - VIRTUAL_HOST=validadorez.sentscompany.com
+      - VIRTUAL_IP=validadorez
+      #172.18.0.5 la direccion IP de su contenedor, se debe verificar con comandos o con el mismo portainer
+      #como en este caso esta dentro de la misma red de docker solo se coloca el nombre del contenedor.
+      - VIRTUAL_NETWORK=nginx-proxy
+      - VIRTUAL_PORT=5000
+      - LETSENCRYPT_HOST=validadorez.sentscompany.com
+      - LETSENCRYPT_EMAIL=contacto@sentscompany.com
+
+volumes:
+  validadorez_data:
+
+    #La red que usara el contenedor
+networks:
+  default:
+    external:
+      name: nginx-proxy

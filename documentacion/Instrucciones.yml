@@ -35,3 +35,14 @@
     pip install Flask
 
 
+############ Construir Imagen Docker local y luego cargarla a docker hub
+
+# primero: construye la iamgen apartir del codigo
+    docker build -t rodriguezfariel/personal:latest .
+# Segundo: verificar que se creo la imagen 
+    docker images
+# Tercero: inicia sessión (Opcional) si ya tines inicada sesion en VSC no es necesario reconoce directamente el login
+    docker login
+# Cuarto: Sube la imagen al repositorio GitHub Listo!
+    docker push rodriguezfariel/personal:latest
+    

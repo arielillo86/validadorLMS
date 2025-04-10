@@ -1,0 +1,58 @@
+# ---- Etapa de construcción ----
+FROM python:3.9-slim as builder
+
+WORKDIR /app
+
+# Instala compiladores para dependencias que necesiten build
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc python3-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Instala dependencias
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+# ---- Etapa final ----
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Copia solo lo necesario desde la etapa builder
+COPY --from=builder /root/.local /root/.local
+COPY . .
+
+# Asegura que los scripts estén en el PATH
+ENV PATH=/root/.local/bin:$PATH
+ENV PYTHONPATH=/app
+
+# Configuración para Flask
+ENV FLASK_APP=run.py
+ENV FLASK_ENV=production
+
+# Configuración de persistencia
+ENV SQLITE_TMPDIR=/tmp
+ENV SQLITE_DB_FILE=/data/database.db
+ENV UPLOAD_FOLDER=/data/uploads
+
+# Crea directorios para persistencia
+RUN mkdir -p /data && \
+    chmod -R 777 /data && \
+    mkdir -p /data/uploads && \
+    chmod -R 777 /data/uploads
+
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=3s \
+    CMD curl -f http://localhost:5000/health || exit 1
+
+EXPOSE 5000
+
+# Comando para ejecutar con Gunicorn
+CMD ["gunicorn", \
+    "--bind", "0.0.0.0:5000", \
+    "--workers", "1", \
+    "--threads", "4", \
+    "--worker-class", "gthread", \
+    "--timeout", "120", \
+    "--log-level", "debug", \
+    "--pythonpath", "/app", \
+    "run:app"]

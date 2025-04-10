@@ -1,7 +1,7 @@
 # app/controllers/main_controller.py
 import webbrowser
-from ..models.ficha_model import Ficha
-from ..models.codigo_model import Codigo
+from app.models.ficha_model import Ficha
+from app.models.codigo_model import Codigo
 
 class MainController:
     @staticmethod

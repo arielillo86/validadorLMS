@@ -1,5 +1,6 @@
 from app import create_app
 
+# Nombre de variable exacto que busca Gunicorn
 app = create_app()
 
 if __name__ == '__main__':
