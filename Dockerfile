@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 # Configurar entorno sin interacción
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 1. Instalar todas las dependencias necesarias en un solo RUN
+# 1. Instalar dependencias como root
 RUN apt-get update && \
     apt-get install -y \
     python3.9 \
@@ -12,51 +12,33 @@ RUN apt-get update && \
     python3.9-venv \
     python3.9-dev \
     gcc && \
-    # Limpieza en el mismo RUN para reducir tamaño de imagen
     apt-get clean && \
-    rm -rf \
-    /var/lib/apt/lists/* \
-    /var/cache/apt/archives \
-    /tmp/* \
-    /var/tmp/* \
-    /usr/share/man \
-    /usr/share/doc
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/man /usr/share/doc
 
-# 2. Configurar enlaces simbólicos
+# 2. Configurar Python
 RUN ln -sf /usr/bin/python3.9 /usr/bin/python && \
-    ln -sf /usr/bin/pip3 /usr/bin/pip
+    ln -sf /usr/bin/pip3 /usr/bin/pip && \
+    python -m venv /opt/venv
 
-# 3. Crear y configurar entorno virtual
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
+# 3. Directorios críticos con permisos globales
+RUN mkdir -p /app/uploads /data/uploads && \
+    chmod -R 777 /app/uploads /data/uploads
 
-# 4. Configurar directorio de trabajo
-WORKDIR /app
-
-# 5. Copiar e instalar dependencias de Python
+# 4. Instalar dependencias
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 6. Copiar aplicación
+# 5. Copiar aplicación
+WORKDIR /app
 COPY . .
 
-# 7. Configurar persistencia
-RUN mkdir -p /data/uploads && \
-    chmod -R 777 /data
-
-# 8. Variables de entorno
+# 6. Variables de entorno
 ENV FLASK_APP=run.py \
     FLASK_ENV=production \
-    PYTHONPATH=/app \
-    SQLITE_DB_FILE=/data/database.db \
-    UPLOAD_FOLDER=/data/uploads
+    UPLOAD_FOLDER=/app/uploads
 
-# 9. Configurar usuario no-root
-RUN groupadd -g 1000 appuser && \
-    useradd -u 1000 -g appuser appuser && \
-    chown -R appuser:appuser /app /data
-
-USER appuser
+# 7. Ejecutar como root (TEMPORAL - solo para desarrollo)
+USER root
 
 EXPOSE 5000
 

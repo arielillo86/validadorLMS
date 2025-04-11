@@ -37,6 +37,9 @@
 
 ############ Construir Imagen Docker local y luego cargarla a docker hub
 
+##Limpieza Cache.
+     docker builder prune --all
+
 # primero: construye la iamgen apartir del codigo
     docker build -t rodriguezfariel/personal:latest .
 # Segundo: verificar que se creo la imagen 
@@ -45,4 +48,5 @@
     docker login
 # Cuarto: Sube la imagen al repositorio GitHub Listo!
     docker push rodriguezfariel/personal:latest
+
     
